@@ -1,12 +1,38 @@
 <script setup>
-import MenuBar from "./components/MenuBar.vue";
+import ocLogo from "/oc-logo-white.png";
+
+const logoURL = ocLogo;
+const title = "Course Listing";
 </script>
 
 <template>
-  <v-app>
-    <MenuBar :key="$route.fullPath" />
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
+  <div id="app">
+    <nav class="navbar shadow">
+      <ul class="nav-links">
+        <div class="title">
+          <li>
+            <router-link :to="{ name: 'list' }">
+              <img :src="logoURL" contain />
+            </router-link>
+          </li>
+          <li>
+            <a>{{ title }}</a>
+          </li>
+        </div>
+      </ul>
+      <ul class="nav-links">
+        <div class="menu">
+          <li>
+            <router-link :to="{ name: 'list' }"><a>LIST</a></router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'addCourse' }"
+              ><a>ADD COURSE</a></router-link
+            >
+          </li>
+        </div>
+      </ul>
+    </nav>
+    <router-view />
+  </div>
 </template>
