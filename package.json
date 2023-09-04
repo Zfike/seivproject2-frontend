@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "cross-env APP_ENV=development vite",
     "build": "cross-env APP_ENV=production vite build",
-    "preview": "vite preview",
-    "bundle": "mv .env dist",
-    "test": "cypress run",
-    "test:open": "cypress open"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
