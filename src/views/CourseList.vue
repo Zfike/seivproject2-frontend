@@ -1,6 +1,6 @@
 <script setup>
 import CourseServices from "../services/CourseServices.js";
-import CourseDisplay from "../componentsCourseDisplay.vue";
+import CourseDisplay from "../components/CourseDisplay.vue";
 
 import { ref, onMounted } from "vue";
 
