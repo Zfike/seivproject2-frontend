@@ -1,5 +1,5 @@
 <script setup>
-import CourseServices from "../services/CourseServices.js";
+import CourseServices from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
 
 import { ref, onMounted } from "vue";
@@ -8,11 +8,11 @@ const course = ref(null);
 const message = ref("");
 
 onMounted(() => {
-  getCourses();
+  getAllCourses();
 });
 
-function getCourses() {
-  CourseServices.getCourses()
+function getAllCourses() {
+  CourseServices.getAllCourses()
     .then((response) => {
       courses.value = response.data;
       message.value = "";
@@ -30,11 +30,11 @@ function getCourses() {
     <br />
     <h2>{{ message }}</h2>
     <div class="grid-container">
-      <StudentDisplay
+      <CourseDisplay
         v-for="course in course"
         :key="course.id"
         :course="course"
-        @deletedCourse="getCourses()"
+        @deletedCourse="getAllCourses()"
       />
     </div>
   </div>
