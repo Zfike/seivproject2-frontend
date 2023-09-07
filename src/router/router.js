@@ -10,17 +10,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/2023/project2/t1/",
       name: "list",
       component: CourseList,
     },
     {
-      path: "/add",
+      path: "/2023/project2/t1/add",
       name: "addCourse",
       component: AddCourse,
     },
     {
-      path: "/edit/:id",
+      path: "/2023/project2/t1/edit/:id",
       name: "editCourse",
       component: EditCourse,
       props: true,
