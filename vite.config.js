@@ -7,7 +7,7 @@ dns.setDefaultResultOrder("verbatim");
 
 export default () => {
   const baseURL =
-    process.env.APP_ENV === "development" ? "/" : "/courses/";
+    process.env.APP_ENV === "development" ? "/" : "/seivproject2-frontend/";
 
   return defineConfig({
     plugins: [vue(), vuetify({ autoImport: true })],
