@@ -6,7 +6,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const valid = ref(false);
 const course = ref({});
-const message = ref("Enter data and click save");
+const message = ref("");
 
 const props = defineProps({
   id: {

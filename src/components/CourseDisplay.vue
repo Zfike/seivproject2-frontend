@@ -31,6 +31,15 @@ function deleteCourse(id) {
   </div>
   <div class="grid-item">
     <router-link
+      :to="{ name: 'view', params: { id: props.course.id } }"
+      custom
+      v-slot="{ navigate }"
+    >
+      <button @click="navigate" role="link">View</button>
+    </router-link>
+  </div>
+  <div class="grid-item">
+    <router-link
       :to="{ name: 'edit', params: { id: props.course.id } }"
       custom
       v-slot="{ navigate }"
@@ -41,6 +50,7 @@ function deleteCourse(id) {
   <div class="grid-item">
     <button @click="show = true" role="link">Delete</button>
   </div>
+  
 
   <div v-if="show" class="modal">
     <div class="modal-content">
