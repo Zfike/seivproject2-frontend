@@ -4,7 +4,7 @@ import CourseDisplay from "../components/CourseDisplay.vue";
 
 import { ref, onMounted } from "vue";
 
-const course = ref(null);
+const courses = ref(null);
 const message = ref("");
 
 onMounted(() => {
@@ -31,7 +31,7 @@ function getAllCourses() {
     <h2>{{ message }}</h2>
     <div class="grid-container">
       <CourseDisplay
-        v-for="course in course"
+        v-for="course in courses"
         :key="course.id"
         :course="course"
         @deletedCourse="getAllCourses()"
