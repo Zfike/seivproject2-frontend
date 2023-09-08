@@ -26,9 +26,8 @@ function deleteCourse(id) {
 </script>
 <template>
   <div class="grid-item">{{ props.course.courseNo }}</div>
-  <div class="grid-item">
-    {{ props.course.name }}
-  </div>
+  <div class="grid-item">{{ props.course.name }}</div>
+
   <div class="grid-item">
     <router-link
       :to="{ name: 'view', params: { id: props.course.id } }"
@@ -38,6 +37,7 @@ function deleteCourse(id) {
       <button @click="navigate" role="link">View</button>
     </router-link>
   </div>
+
   <div class="grid-item">
     <router-link
       :to="{ name: 'edit', params: { id: props.course.id } }"
@@ -47,6 +47,7 @@ function deleteCourse(id) {
       <button @click="navigate" role="link">Edit</button>
     </router-link>
   </div>
+
   <div class="grid-item">
     <button @click="show = true" role="link">Delete</button>
   </div>

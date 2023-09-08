@@ -38,7 +38,7 @@ onMounted(() => {
 
 <template>
   <div id="body">
-    <h1>Course Edit</h1>
+    <h1>Course View</h1>
     <h2>{{ message }}</h2>
     <h4>{{ course.name }}</h4>
     <br />
@@ -109,7 +109,7 @@ onMounted(() => {
 
     <br />
     
-    <button name="cancel" v-on:click.prevent="cancel()">Cancel</button>
+    <button name="cancel" v-on:click.prevent="cancel()">Back</button>
   </div>
 </template>
 
