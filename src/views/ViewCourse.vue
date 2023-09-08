@@ -1,46 +1,48 @@
 <script setup>
 import services from "../services/services.js";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const message = ref("");
-
+const valid = ref(false);
 const course = ref({});
+const message = ref("Enter data and click save");
+
+const props = defineProps({
+  id: {
+    required: true,
+  },
+});
+
 const errors = ref({});
 
-function addCourse() {
-  services.addCourse(course.value)
-    .then(() => {
-      router.push({ name: "list" });
-    })
-    .catch((error) => {
-      if (error.response != null && error.response.status == "406") {
-        for (let obj of error.response.data) {
-          if (obj.attributeName === undefined) {
-            obj.attributeName = "courseNo";
-          }
-          errors.value[obj.attributeName] = obj.message;
-        }
-      } else {
-        message.value = "Error: " + error.code + ":" + error.message;
-        console.log(error);
-        console.log(error);
-      }
-    });
-}
+
+const retrieveCourse = async () => {
+  try {
+    const response = await services.getCourse(props.id);
+    course.value = response.data;
+  } catch (e) {
+    message.value = e.response.data.message;
+  }
+};
+
 function cancel() {
   router.push({ name: "list" });
 }
+
+onMounted(() => {
+  retrieveCourse();
+});
+
 </script>
 
 <template>
   <div id="body">
-    <h1>Course Add</h1>
+    <h1>Course Edit</h1>
     <h2>{{ message }}</h2>
     <h4>{{ course.name }}</h4>
     <br />
-    
+
     <div class="form">
 
       <div class="form-group">
@@ -106,11 +108,9 @@ function cancel() {
     </div>
 
     <br />
-
-    <button class="success" name="Save" v-on:click.prevent="addCourse()">
-      Add
-    </button>
-
-    <button name="Cancel" v-on:click.prevent="cancel()">Cancel</button>
+    
+    <button name="cancel" v-on:click.prevent="cancel()">Cancel</button>
   </div>
 </template>
+
+<style></style>

@@ -26,7 +26,7 @@ const title = "Course Listing";
             <router-link :to="{ name: 'list' }"><a>LIST</a></router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'addCourse' }"
+            <router-link :to="{ name: 'add' }"
               ><a>ADD COURSE</a></router-link
             >
           </li>

@@ -1,5 +1,5 @@
 <script setup>
-import CourseServices from "../services/services.js";
+import services from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
 
 import { ref, onMounted } from "vue";
@@ -12,7 +12,7 @@ onMounted(() => {
 });
 
 function getAllCourses() {
-  CourseServices.getAllCourses()
+  services.getAllCourses()
     .then((response) => {
       courses.value = response.data;
       message.value = "";

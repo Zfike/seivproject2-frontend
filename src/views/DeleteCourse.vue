@@ -1,5 +1,5 @@
 <script setup>
-import CourseServices from "../services/services.js";
+import services from "../services/services.js";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
@@ -16,7 +16,7 @@ const course = ref({});
 const errors = ref({});
 
 onMounted(() => {
-  CourseServices.getCourse(props.id)
+  services.getCourse(props.id)
     .then((response) => {
       course.value = response.data[0];
       message.value = "";
