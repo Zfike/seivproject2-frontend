@@ -1,10 +1,12 @@
 <script setup>
-import CourseServices from "../services/services.js";
+import services from "../services/services.js";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const message = ref("");
+const valid = ref(false);
+const course = ref({});
+const message = ref("Enter data and click save");
 
 const props = defineProps({
   id: {
@@ -12,39 +14,44 @@ const props = defineProps({
   },
 });
 
-const course = ref({});
 const errors = ref({});
 
-onMounted(() => {
-  CourseServices.getCourse(props.id)
-    .then((response) => {
-      course.value = response.data[0];
-      message.value = "";
-    })
-    .catch((error) => {
-      message.value = "Error: " + error.code + ":" + error.message;
-      console.log(error);
-    });
-});
-function updateCourse() {
-  CourseServices.updateCourse(course.value)
-    .then(() => {
-      router.push({ name: "list" });
-    })
-    .catch((error) => {
-      if (error.response.status == "406") {
-        for (let obj of error.response.data) {
-          errors.value[obj.attributeName] = obj.message;
-        }
-      } else {
-        message.value = "Error: " + error.code + ":" + error.message;
-        console.log(error);
-      }
-    });
-}
+
+const retrieveCourse = async () => {
+  try {
+    const response = await services.getCourse(props.id);
+    course.value = response.data;
+  } catch (e) {
+    message.value = e.response.data.message;
+  }
+};
+
+const updateCourse = async () => {
+  const data = {
+    dept: course.value.dept,
+    courseNo: course.value.courseNo,
+    level: course.value.level,
+    hours: course.value.hours,
+    name: course.value.name,
+    description: course.value.description,
+  };
+  try {
+    const response = await services.updateCourse(props.id, data);
+    course.value.id = response.data.id;
+    router.push({ name: "list" });
+  } catch (e) {
+    message.value = e.response.data.message;
+  }
+};
+
 function cancel() {
   router.push({ name: "list" });
 }
+
+onMounted(() => {
+  retrieveCourse();
+});
+
 </script>
 
 <template>

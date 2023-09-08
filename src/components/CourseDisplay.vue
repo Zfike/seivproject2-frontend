@@ -1,5 +1,5 @@
 <script setup>
-import CourseServices from "../services/services.js";
+import services from "../services/services.js";
 import { ref } from "vue";
 const props = defineProps(["course"]);
 const emit = defineEmits(["deletedCourse"]);
@@ -12,7 +12,7 @@ function deletedCourse() {
 }
 
 function deleteCourse(id) {
-  CourseServices.deleteCourse(id)
+  services.deleteCourse(id)
     .then((response) => {
       show.value = false;
       deleteError.value = false;
@@ -31,7 +31,7 @@ function deleteCourse(id) {
   </div>
   <div class="grid-item">
     <router-link
-      :to="{ name: 'editCourse', params: { id: props.course.id } }"
+      :to="{ name: 'edit', params: { id: props.course.id } }"
       custom
       v-slot="{ navigate }"
     >
