@@ -40,7 +40,19 @@ function cancel() {
     <h2>{{ message }}</h2>
     <h4>{{ course.name }}</h4>
     <br />
+    
     <div class="form">
+
+      <div class="form-group">
+        <label for="dept">
+          Dept
+          <span id="deptErr" class="text-error">{{
+            errors.dept || "*"
+          }}</span>
+        </label>
+        <input v-model="course.dept" type="text" id="dept" />
+      </div>
+
       <div class="form-group">
         <label for="courseNo">
           Course Number
@@ -49,6 +61,26 @@ function cancel() {
           }}</span>
         </label>
         <input v-model="course.courseNo" type="text" id="courseNo" />
+      </div>
+
+      <div class="form-group">
+        <label for="level">
+          Level
+          <span id="levelErr" class="text-error">{{
+            errors.level || "*"
+          }}</span>
+        </label>
+        <input v-model="course.level" type="text" id="level" />
+      </div>
+
+      <div class="form-group">
+        <label for="hours">
+          Hours
+          <span id="hoursErr" class="text-error">{{
+            errors.hours || "*"
+          }}</span>
+        </label>
+        <input v-model="course.hours" type="text" id="hours" />
       </div>
 
       <div class="form-group">
@@ -61,11 +93,24 @@ function cancel() {
         <input v-model="course.name" type="text" id="name" />
       </div>
 
+      <div class="form-group">
+        <label for="description">
+          Description
+          <span id="descriptionErr" class="text-error">{{
+            errors.description || "*"
+          }}</span>
+        </label>
+        <input v-model="course.description" type="text" id="description" />
+      </div>
+
     </div>
+
     <br />
+
     <button class="success" name="Save" v-on:click.prevent="addCourse()">
       Add
     </button>
+
     <button name="Cancel" v-on:click.prevent="cancel()">Cancel</button>
   </div>
 </template>
