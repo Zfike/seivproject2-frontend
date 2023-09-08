@@ -217,3 +217,12 @@ select {
   border-radius: 0.25rem;
   width: 100%;
 }
+
+.readonly-field {
+  border: 1px solid #ccc; /* Add a border */
+  padding: 5px; /* Add padding for spacing */
+  min-height: 30px; /* Set a minimum height for consistency */
+  display: inline-block; /* Display as inline-block for inline appearance */
+  width: 100%; /* Make it full-width */
+  background-color: #f0f0f0; /* Optional background color */
+}
