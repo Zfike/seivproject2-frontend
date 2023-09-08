@@ -48,61 +48,55 @@ onMounted(() => {
       <div class="form-group">
         <label for="dept">
           Dept
-          <span id="deptErr" class="text-error">{{
-            errors.dept || "*"
-          }}</span>
         </label>
-        <input v-model="course.dept" type="text" id="dept" />
+        <div id="dept" class="readonly-field">
+          {{ course.dept }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="courseNo">
           Course Number
-          <span id="courseNoErr" class="text-error">{{
-            errors.courseNo || "*"
-          }}</span>
         </label>
-        <input v-model="course.courseNo" type="text" id="courseNo" />
+        <div id="courseNo" class="readonly-field">
+          {{ course.courseNo }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="level">
           Level
-          <span id="levelErr" class="text-error">{{
-            errors.level || "*"
-          }}</span>
         </label>
-        <input v-model="course.level" type="text" id="level" />
+        <div id="level" class="readonly-field">
+          {{ course.level }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="hours">
           Hours
-          <span id="hoursErr" class="text-error">{{
-            errors.hours || "*"
-          }}</span>
         </label>
-        <input v-model="course.hours" type="text" id="hours" />
+        <div id="hours" class="readonly-field">
+          {{ course.hours }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="name">
           Course Name
-          <span id="nameErr" class="text-error">{{
-            errors.name || "*"
-          }}</span>
         </label>
-        <input v-model="course.name" type="text" id="name" />
+        <div id="name" class="readonly-field">
+          {{ course.name }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="description">
           Description
-          <span id="descriptionErr" class="text-error">{{
-            errors.description || "*"
-          }}</span>
         </label>
-        <input v-model="course.description" type="text" id="description" />
+        <div id="description" class="readonly-field">
+          {{ course.description }}
+        </div>
       </div>
 
     </div>
