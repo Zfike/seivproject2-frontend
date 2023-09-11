@@ -2,6 +2,7 @@
 import services from "../services/services.js";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+//import { VRow, VCol } from "vuetify";
 
 const router = useRouter();
 const valid = ref(false);
@@ -43,63 +44,46 @@ onMounted(() => {
     <h4>{{ course.name }}</h4>
     <br />
 
-    <div class="form">
-
-      <div class="form-group">
-        <label for="dept">
-          Dept
-        </label>
-        <div id="dept" class="readonly-field">
-          {{ course.dept }}
+      <v-row justify="center" align="center">
+      <v-col cols="12" sm="6" md="4">
+        <div class="form-group">
+          <label for="dept">Dept</label>
+          <div id="dept" class="readonly-field">{{ course.dept }}</div>
         </div>
-      </div>
+      </v-col>
 
-      <div class="form-group">
-        <label for="courseNo">
-          Course Number
-        </label>
-        <div id="courseNo" class="readonly-field">
-          {{ course.courseNo }}
+      <v-col cols="12" sm="6" md="4">
+        <div class="form-group">
+          <label for="courseNo">Course Number</label>
+          <div id="courseNo" class="readonly-field">{{ course.courseNo }}</div>
         </div>
-      </div>
+      </v-col>
+    </v-row>
 
-      <div class="form-group">
-        <label for="level">
-          Level
-        </label>
-        <div id="level" class="readonly-field">
-          {{ course.level }}
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="6" md="4">
+        <div class="form-group">
+          <label for="level">Level</label>
+          <div id="level" class="readonly-field">{{ course.level }}</div>
         </div>
-      </div>
+      </v-col>
 
-      <div class="form-group">
-        <label for="hours">
-          Hours
-        </label>
-        <div id="hours" class="readonly-field">
-          {{ course.hours }}
+      <v-col cols="12" sm="6" md="4">
+        <div class="form-group">
+          <label for="hours">Hours</label>
+          <div id="hours" class="readonly-field">{{ course.hours }}</div>
         </div>
-      </div>
+      </v-col>
+    </v-row>
 
-      <div class="form-group">
-        <label for="name">
-          Course Name
-        </label>
-        <div id="name" class="readonly-field">
-          {{ course.name }}
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="6" md="4">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <div id="description" class="textarea">{{ course.description }}</div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="description">
-          Description
-        </label>
-        <div id="description" class="readonly-field">
-          {{ course.description }}
-        </div>
-      </div>
-
-    </div>
+      </v-col>
+    </v-row>
 
     <br />
     
