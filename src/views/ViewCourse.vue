@@ -80,7 +80,7 @@ onMounted(() => {
       <v-col cols="12" sm="6" md="4">
         <div class="form-group">
           <label for="description">Description</label>
-          <div id="description" class="textarea">{{ course.description }}</div>
+          <div id="description" class="textarea" style="text-align: left">{{ course.description }}</div>
         </div>
       </v-col>
     </v-row>
