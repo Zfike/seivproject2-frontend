@@ -63,14 +63,13 @@ onMounted(() => {
 
     <div class="form">
 
+
       <div class="form-group">
         <label for="dept">
           Dept
-          <span id="deptErr" class="text-error">{{
-            errors.dept || "*"
-          }}</span>
+          <span id="deptErr" class="text-error">{{ errors.dept || "*" }}</span>
         </label>
-        <input v-model="course.dept" type="text" id="dept" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -80,7 +79,7 @@ onMounted(() => {
             errors.courseNo || "*"
           }}</span>
         </label>
-        <input v-model="course.courseNo" type="text" id="courseNo" />
+        <v-text-field v-model="course.courseNo" variant="outlined" id="courseNo"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -90,7 +89,7 @@ onMounted(() => {
             errors.level || "*"
           }}</span>
         </label>
-        <input v-model="course.level" type="text" id="level" />
+        <v-text-field v-model="course.level" variant="outlined" id="level"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -100,7 +99,7 @@ onMounted(() => {
             errors.hours || "*"
           }}</span>
         </label>
-        <input v-model="course.hours" type="text" id="hours" />
+        <v-text-field v-model="course.hours" variant="outlined" id="hours"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -110,7 +109,7 @@ onMounted(() => {
             errors.name || "*"
           }}</span>
         </label>
-        <input v-model="course.name" type="text" id="name" />
+        <v-text-field v-model="course.name" variant="outlined" id="name"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -120,7 +119,7 @@ onMounted(() => {
             errors.description || "*"
           }}</span>
         </label>
-        <input v-model="course.description" type="text" id="description" />
+        <v-text-field v-model="course.description" variant="outlined" id="description"></v-text-field>
       </div>
 
     </div>
