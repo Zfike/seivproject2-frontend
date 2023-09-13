@@ -13,7 +13,7 @@ const sortOrder = ref("asc"); // Initialize sorting order to ascending
 onMounted(() => {
   const savedPage = localStorage.getItem("currentPage");
   if (savedPage) {
-    currentPage.value = parseInt(savedPage, 8);
+    currentPage.value = parseInt(savedPage, 10);
   }
 });
 
@@ -42,7 +42,7 @@ function changePage(page) {
 }
 
 // Define a computed property to calculate the courses to display for the current page
-const coursesPerPage = 8;
+const coursesPerPage = 10;
 const filteredCourses = computed(() => {
   if (!courses.value) return [];
   return sortCourses(courses.value);
@@ -88,6 +88,7 @@ function sortCourses(courses) {
         v-for="course in paginatedCourses"
         :key="course.id"
         :course="course"
+        :currentPage="currentPage"
         @deletedCourse="getAllCourses()"
       />
     </div>
