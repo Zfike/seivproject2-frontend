@@ -88,6 +88,7 @@ function sortCourses(courses) {
         v-for="course in paginatedCourses"
         :key="course.id"
         :course="course"
+        :currentPage="currentPage"
         @deletedCourse="getAllCourses()"
       />
     </div>
