@@ -1,11 +1,12 @@
 <script setup>
-import services from "../services/services.js";
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-//import { VRow, VCol } from "vuetify";
+import services from "../services/services.js";
+
+const currentPage = ref(1); // Define currentPage as a ref
+
 
 const router = useRouter();
-const valid = ref(false);
 const course = ref({});
 const message = ref("");
 
@@ -15,26 +16,25 @@ const props = defineProps({
   },
 });
 
-const errors = ref({});
-
-
 const retrieveCourse = async () => {
   try {
     const response = await services.getCourse(props.id);
     course.value = response.data;
+    message.value = ""; // Clear any previous error message
   } catch (e) {
-    message.value = e.response.data.message;
+    message.value = e.response ? e.response.data.message : "An error occurred while retrieving the course.";
   }
 };
 
-function cancel() {
-  router.push({ name: "list" });
+function goBack() {
+  const pageQueryParam = router.currentRoute.value.query.page;
+  const destination = pageQueryParam ? { name: "list", query: { page: pageQueryParam } } : { name: "list" };
+  router.push(destination);
 }
 
 onMounted(() => {
   retrieveCourse();
 });
-
 </script>
 
 <template>
@@ -87,7 +87,7 @@ onMounted(() => {
 
     <br />
     
-    <button name="cancel" v-on:click.prevent="cancel()">Back</button>
+    <button name="cancel" v-on:click.prevent="goBack()">Back</button>
   </div>
 </template>
 
