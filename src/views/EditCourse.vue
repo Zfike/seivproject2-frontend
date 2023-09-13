@@ -44,8 +44,10 @@ const updateCourse = async () => {
   }
 };
 
-function cancel() {
-  router.push({ name: "list" });
+function goBack() {
+  const pageQueryParam = router.currentRoute.value.query.page;
+  const destination = pageQueryParam ? { name: "list", query: { page: pageQueryParam } } : { name: "list" };
+  router.push(destination);
 }
 
 onMounted(() => {
@@ -130,7 +132,7 @@ onMounted(() => {
       Update
     </button>
     
-    <button name="cancel" v-on:click.prevent="cancel()">Cancel</button>
+    <button name="cancel" v-on:click.prevent="goBack()">Cancel</button>
   </div>
 </template>
 

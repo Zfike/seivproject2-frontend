@@ -13,7 +13,7 @@ const sortOrder = ref("asc"); // Initialize sorting order to ascending
 onMounted(() => {
   const savedPage = localStorage.getItem("currentPage");
   if (savedPage) {
-    currentPage.value = parseInt(savedPage, 10);
+    currentPage.value = parseInt(savedPage, 8);
   }
 });
 
@@ -42,7 +42,7 @@ function changePage(page) {
 }
 
 // Define a computed property to calculate the courses to display for the current page
-const coursesPerPage = 10;
+const coursesPerPage = 8;
 const filteredCourses = computed(() => {
   if (!courses.value) return [];
   return sortCourses(courses.value);
@@ -81,6 +81,8 @@ function sortCourses(courses) {
       <!-- You can add more buttons or a dropdown for selecting sorting criteria -->
     </div>
     
+    <br />
+
     <div class="grid-container">
       <CourseDisplay
         v-for="course in paginatedCourses"
@@ -90,7 +92,6 @@ function sortCourses(courses) {
       />
     </div>
     
-<br />
 <br />
 
     <!-- Pagination Controls -->
