@@ -29,14 +29,15 @@ function deleteCourse(id) {
   <div class="grid-item">{{ props.course.name }}</div>
 
   <div class="grid-item">
-    <router-link
-      :to="{ name: 'view', params: { id: props.course.id } }"
-      custom
-      v-slot="{ navigate }"
-    >
-      <button @click="navigate" role="link">View</button>
-    </router-link>
-  </div>
+  <router-link
+    :to="{ name: 'view', params: { id: props.course.id }, query: { page: currentPage } }"
+    custom
+    v-slot="{ navigate }"
+  >
+    <button @click="navigate" role="link">View</button>
+  </router-link>
+</div>
+
 
   <div class="grid-item">
     <router-link

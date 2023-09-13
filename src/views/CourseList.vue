@@ -1,48 +1,21 @@
-<template>
-  <div id="body">
-    <h1>Course List</h1>
-    <br />
-    <h2>{{ message }}</h2>
-    
-    <!-- Sort buttons or dropdown -->
-    <div class="sort-controls">
-      <button @click="toggleSortOrder">Sort By Course Number</button>
-      <!-- You can add more buttons or a dropdown for selecting sorting criteria -->
-    </div>
-
-    <br />
-    
-    <div class="grid-container">
-      <CourseDisplay
-        v-for="course in paginatedCourses"
-        :key="course.id"
-        :course="course"
-        @deletedCourse="getAllCourses()"
-      />
-    </div>
-    
-    <br />
-    <br />
-
-    <!-- Pagination Controls -->
-    <div class="pagination">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }}</span>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
-    </div>
-  </div>
-</template>
-
 <script setup>
+import { ref, computed, onMounted } from "vue";
 import services from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
-
-import { ref, onMounted, computed } from "vue";
 
 const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
+
+
+// On component mount, retrieve the current page from localStorage (if it exists)
+onMounted(() => {
+  const savedPage = localStorage.getItem("currentPage");
+  if (savedPage) {
+    currentPage.value = parseInt(savedPage, 10);
+  }
+});
 
 onMounted(() => {
   getAllCourses();
@@ -60,6 +33,14 @@ function getAllCourses() {
     });
 }
 
+// Function to change the current page
+function changePage(page) {
+  currentPage.value = page;
+
+  // Save the current page to localStorage
+  localStorage.setItem("currentPage", page.toString());
+}
+
 // Define a computed property to calculate the courses to display for the current page
 const coursesPerPage = 10;
 const filteredCourses = computed(() => {
@@ -72,11 +53,6 @@ const paginatedCourses = computed(() => {
   const endIndex = startIndex + coursesPerPage;
   return filteredCourses.value.slice(startIndex, endIndex);
 });
-
-// Function to change the current page
-function changePage(page) {
-  currentPage.value = page;
-}
 
 // Function to toggle sorting order
 function toggleSortOrder() {
@@ -92,3 +68,36 @@ function sortCourses(courses) {
   }
 }
 </script>
+
+<template>
+  <div id="body">
+    <h1>Course List</h1>
+    <br />
+    <h2>{{ message }}</h2>
+    
+    <!-- Sort buttons or dropdown -->
+    <div class="sort-controls">
+      <button @click="toggleSortOrder">Toggle Sort Order</button>
+      <!-- You can add more buttons or a dropdown for selecting sorting criteria -->
+    </div>
+    
+    <div class="grid-container">
+      <CourseDisplay
+        v-for="course in paginatedCourses"
+        :key="course.id"
+        :course="course"
+        @deletedCourse="getAllCourses()"
+      />
+    </div>
+    
+<br />
+<br />
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
+    </div>
+  </div>
+</template>
