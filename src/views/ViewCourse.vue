@@ -29,12 +29,6 @@ function goBack() {
   router.push(destination);
 }
 
-function goToPage() {
-  // Clear local storage before navigating back
-  localStorage.removeItem("currentPage");
-  router.go(-1); // Go back to the previous page
-}
-
 onMounted(() => {
   retrieveCourse();
 });
@@ -91,7 +85,7 @@ onMounted(() => {
     <br />
   
     <button name="cancel" v-on:click.prevent="goBack()">Back</button>
-    
+
   </div>
 </template>
 
