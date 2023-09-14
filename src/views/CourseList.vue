@@ -11,7 +11,6 @@ const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
 
 
-
 // On component mount, retrieve the current page from localStorage (if it exists)
 onMounted(() => {
   const savedPage = localStorage.getItem("currentPage");
@@ -44,6 +43,12 @@ function changePage(page) {
   localStorage.setItem("currentPage", page.toString());
 }
 
+function toPageOne() {
+  localStorage.removeItem("currentPage"); // Clear the current page from local storage
+  currentPage.value = 1; // Set the current page to 1
+  router.push({ name: "list", query: { page: 1 } }); // Navigate back to the first page
+}
+
 // Define a computed property to calculate the courses to display for the current page
 const coursesPerPage = 10;
 const filteredCourses = computed(() => {
@@ -57,11 +62,6 @@ const paginatedCourses = computed(() => {
   return filteredCourses.value.slice(startIndex, endIndex);
 });
 
-// Function to toggle sorting order
-function toggleSortOrder() {
-  sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
-}
-
 // Function to sort courses by courseNo
 function sortCourses(courses) {
   if (sortOrder.value === "asc") {
@@ -70,12 +70,6 @@ function sortCourses(courses) {
     return courses.slice().sort((a, b) => b.courseNo.localeCompare(a.courseNo));
   }
 }
-
-function toPageOne() {
-  localStorage.removeItem("currentPage"); // Clear the current page from local storage
-  currentPage.value = 1; // Set the current page to 1
-  router.push({ name: "list", query: { page: 1 } }); // Navigate back to the first page
-}
 </script>
 
 <template>
@@ -83,11 +77,6 @@ function toPageOne() {
     <h1>Course List</h1>
     <br />
     <h2>{{ message }}</h2>
-    
-    <!-- <br />
-    <button @click="toPageOne()">Go To Page 1</button>
-    <br />
-    <br /> -->
 
     <!-- Pagination Controls -->
     <div class="pagination">
