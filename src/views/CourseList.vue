@@ -109,8 +109,6 @@ function updateDeptFilter(dept) {
 <template>
   <div id="body">
     <h1>Course List</h1>
-    <br />
-    <h2>{{ message }}</h2>
 
     <!-- Dept Filter -->
     <v-row align="left">
@@ -141,9 +139,6 @@ function updateDeptFilter(dept) {
       </div>
     </div>
 
-
-
-    
     <br />
     
     <div class="grid-container">
