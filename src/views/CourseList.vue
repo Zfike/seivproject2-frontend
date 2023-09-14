@@ -7,13 +7,18 @@ const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
+const selectedDept = ref(""); // Initialize the department filter
 
 
 // On component mount, retrieve the current page from localStorage (if it exists)
 onMounted(() => {
   const savedPage = localStorage.getItem("currentPage");
+  const savedDept = localStorage.getItem("selectedDept");
   if (savedPage) {
     currentPage.value = parseInt(savedPage, 10);
+  }
+  if (savedDept) {
+    selectedDept.value = savedDept;
   }
 });
 
@@ -42,10 +47,29 @@ function changePage(page) {
 }
 
 // Define a computed property to calculate the courses to display for the current page
-const coursesPerPage = 10;
+const coursesPerPage = 8;
+
+const uniqueDepartments = computed(() => {
+  if (!courses.value) return [];
+  
+  // Extract unique department values from the courses
+  const departments = new Set();
+  courses.value.forEach(course => {
+    departments.add(course.dept);
+  });
+  return Array.from(departments);
+});
+
 const filteredCourses = computed(() => {
   if (!courses.value) return [];
-  return sortCourses(courses.value);
+  let filtered = courses.value;
+  
+  // Apply the department filter
+  if (selectedDept.value) {
+    filtered = filtered.filter(course => course.dept === selectedDept.value);
+  }
+
+  return filtered;
 });
 
 const paginatedCourses = computed(() => {
@@ -54,7 +78,7 @@ const paginatedCourses = computed(() => {
   return filteredCourses.value.slice(startIndex, endIndex);
 });
 
-// Function to toggle sorting order
+//Function to toggle sorting order
 function toggleSortOrder() {
   sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
 }
@@ -67,6 +91,14 @@ function sortCourses(courses) {
     return courses.slice().sort((a, b) => b.courseNo.localeCompare(a.courseNo));
   }
 }
+
+// Function to update the selected department filter
+function updateDeptFilter(dept) {
+  selectedDept.value = dept;
+  
+  // Save the selected department filter to localStorage
+  localStorage.setItem("selectedDept", dept);
+}
 </script>
 
 <template>
@@ -74,12 +106,19 @@ function sortCourses(courses) {
     <h1>Course List</h1>
     <br />
     <h2>{{ message }}</h2>
-    
-    <!-- Sort buttons or dropdown -->
-    <div class="sort-controls">
-      <button @click="toggleSortOrder">Toggle Sort Order</button>
-      <!-- You can add more buttons or a dropdown for selecting sorting criteria -->
-    </div>
+
+    <v-row align="left">
+    <v-col cols="12" sm="6" md="4">
+    <v-select
+      v-model="selectedDept"
+      :items="uniqueDepartments"
+      label="Filter by Department"
+      variant="solo-filled"
+      clearable
+      @change="updateDeptFilter(selectedDept)"
+    ></v-select>
+    </v-col>
+    </v-row>
     
     <div class="grid-container">
       <CourseDisplay
@@ -101,3 +140,9 @@ function sortCourses(courses) {
     </div>
   </div>
 </template>
+
+<style scoped>
+  .v-select {
+    width: 200px;
+  }
+</style>
