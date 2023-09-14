@@ -225,4 +225,16 @@ select {
   display: inline-block; /* Display as inline-block for inline appearance */
   width: 100%; /* Make it full-width */
   background-color: #f0f0f0; /* Optional background color */
+
 }
+
+.mdi-close-circle {
+background-color: grey;
+}
+
+.mdi-menu-down{
+  
+  background-color: grey;
+  
+}
+
