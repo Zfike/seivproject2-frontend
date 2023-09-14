@@ -45,7 +45,7 @@ function changePage(page) {
 }
 
 // Define a computed property to calculate the courses to display for the current page
-const coursesPerPage = 5;
+const coursesPerPage = 10;
 const filteredCourses = computed(() => {
   if (!courses.value) return [];
   return sortCourses(courses.value);
