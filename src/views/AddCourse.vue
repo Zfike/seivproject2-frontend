@@ -5,7 +5,6 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const message = ref("");
-
 const course = ref({});
 const errors = ref({});
 
@@ -29,6 +28,7 @@ function addCourse() {
       }
     });
 }
+
 function cancel() {
   window.history.back();
 }
@@ -39,10 +39,10 @@ function cancel() {
     <h1>Course Add</h1>
     <h2>{{ message }}</h2>
     <h4>{{ course.name }}</h4>
+    
     <br />
     
     <div class="form">
-
       <div class="form-group">
         <label for="dept">
           Dept
@@ -102,7 +102,6 @@ function cancel() {
         </label>
         <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
-
     </div>
 
     <br />
@@ -110,7 +109,6 @@ function cancel() {
     <button class="success" name="Save" v-on:click.prevent="addCourse()">
       Add
     </button>
-
     <button name="Cancel" v-on:click.prevent="cancel()">Cancel</button>
   </div>
 </template>

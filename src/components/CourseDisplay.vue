@@ -1,12 +1,13 @@
 <script setup>
 import services from "../services/services.js";
 import { ref } from "vue";
+
 const props = defineProps({
   course: Object, // Assuming 'course' is passed as a prop
   currentPage: Number, // Define currentPage as a prop
 });
-const emit = defineEmits(["deletedCourse"]);
 
+const emit = defineEmits(["deletedCourse"]);
 const show = ref(false);
 const deleteError = ref(false);
 
@@ -27,20 +28,20 @@ function deleteCourse(id) {
     });
 }
 </script>
+
 <template>
   <div class="grid-item">{{ props.course.courseNo }}</div>
   <div class="grid-item">{{ props.course.name }}</div>
 
   <div class="grid-item">
-  <router-link
-    :to="{ name: 'view', params: { id: props.course.id }, query: { page: currentPage } }"
-    custom
-    v-slot="{ navigate }"
-  >
-    <button @click="navigate" role="link">View</button>
-  </router-link>
-</div>
-
+    <router-link
+      :to="{ name: 'view', params: { id: props.course.id }, query: { page: currentPage } }"
+      custom
+      v-slot="{ navigate }"
+    >
+      <button @click="navigate" role="link">View</button>
+    </router-link>
+  </div>
 
   <div class="grid-item">
     <router-link
@@ -56,7 +57,6 @@ function deleteCourse(id) {
     <button @click="show = true" role="link">Delete</button>
   </div>
   
-
   <div v-if="show" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,5 +94,3 @@ function deleteCourse(id) {
     </div>
   </div>
 </template>
-
-<style></style>

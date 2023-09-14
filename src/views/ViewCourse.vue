@@ -13,6 +13,10 @@ const props = defineProps({
   },
 });
 
+onMounted(() => {
+  retrieveCourse();
+});
+
 const retrieveCourse = async () => {
   try {
     const response = await services.getCourse(props.id);
@@ -28,10 +32,6 @@ function goBack() {
   const destination = pageQueryParam ? { name: "list", query: { page: pageQueryParam } } : { name: "list" };
   router.push(destination);
 }
-
-onMounted(() => {
-  retrieveCourse();
-});
 </script>
 
 <template>
@@ -85,8 +85,5 @@ onMounted(() => {
     <br />
   
     <button name="cancel" v-on:click.prevent="goBack()">Back</button>
-
   </div>
 </template>
-
-<style></style>
