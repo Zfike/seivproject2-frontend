@@ -45,7 +45,7 @@ function changePage(page) {
 }
 
 // Define a computed property to calculate the courses to display for the current page
-const coursesPerPage = 10;
+const coursesPerPage = 5;
 const filteredCourses = computed(() => {
   if (!courses.value) return [];
   return sortCourses(courses.value);
@@ -84,12 +84,21 @@ function toPageOne() {
     <br />
     <h2>{{ message }}</h2>
     
-    <!-- Sort buttons or dropdown -->
-    <div class="sort-controls">
-      <button @click="toggleSortOrder">Toggle Sort Order</button>
-      <!-- You can add more buttons or a dropdown for selecting sorting criteria -->
+    <!-- <br />
+    <button @click="toPageOne()">Go To Page 1</button>
+    <br />
+    <br /> -->
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
     </div>
-    
+
+    <br />
+    <button @click="toPageOne()">Go To Page 1</button>
+    <br />
     <br />
 
     <div class="grid-container">
@@ -101,16 +110,5 @@ function toPageOne() {
         @deletedCourse="getAllCourses()"
       />
     </div>
-    
-<br />
-
-    <!-- Pagination Controls -->
-    <div class="pagination">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }}</span>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
-    </div>
-    <br />
-    <button @click="toPageOne()">Go To Page 1</button>
   </div>
 </template>
