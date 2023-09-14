@@ -113,16 +113,22 @@ function updateDeptFilter(dept) {
     </v-col>
     </v-row>
 
-    <button @click="toPageOne()">Go To Page 1</button>
-
-    <br /><br /><br />
+    <br />
 
     <!-- Pagination Controls -->
     <div class="pagination">
-      <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }}</span>
-      <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
+      <div class="pagination-button">
+        <button @click="toPageOne()">≪</button>
+        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">&#60;</button>
+      </div>
+      <div class="page-number">Page {{ currentPage }}</div>
+      <div class="pagination-button">
+        <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">&#62;</button>
+      </div>
     </div>
+
+
+
     
     <br />
     

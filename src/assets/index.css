@@ -238,3 +238,16 @@ background-color: grey;
   
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-button {
+  margin-right: 10px; /* Adjust the margin as needed to push the "<<" button to the left */
+}
+
+.page-number {
+  font-size: 1.2em; /* Adjust the font size as needed */
+}
