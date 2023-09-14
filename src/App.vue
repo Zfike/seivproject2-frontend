@@ -2,7 +2,7 @@
 import ocLogo from "/oc-logo-white.png";
 
 const logoURL = ocLogo;
-const title = "Course Listing";
+const title = "Course List";
 </script>
 
 <template>
