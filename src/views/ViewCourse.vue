@@ -89,10 +89,9 @@ onMounted(() => {
     </v-row>
 
     <br />
-    
+  
     <button name="cancel" v-on:click.prevent="goBack()">Back</button>
-    <button name="cancel" v-on:click.prevent="goToPage()">Go to Page 1</button>
-
+    
   </div>
 </template>
 
