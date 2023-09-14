@@ -122,7 +122,7 @@ function updateDeptFilter(dept) {
       :items="uniqueDepartments"
       label="Filter by Department"
       variant="solo-filled"
-      clearable
+      clearable 
       @change="updateDeptFilter(selectedDept)"
     ></v-select>
     </v-col>
