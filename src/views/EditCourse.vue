@@ -7,6 +7,7 @@ const router = useRouter();
 const valid = ref(false);
 const course = ref({});
 const message = ref("Enter data and click save");
+const errors = ref({});
 
 const props = defineProps({
   id: {
@@ -14,8 +15,9 @@ const props = defineProps({
   },
 });
 
-const errors = ref({});
-
+onMounted(() => {
+  retrieveCourse();
+});
 
 const retrieveCourse = async () => {
   try {
@@ -49,11 +51,6 @@ function goBack() {
   const destination = pageQueryParam ? { name: "list", query: { page: pageQueryParam } } : { name: "list" };
   router.push(destination);
 }
-
-onMounted(() => {
-  retrieveCourse();
-});
-
 </script>
 
 <template>
@@ -64,8 +61,6 @@ onMounted(() => {
     <br />
 
     <div class="form">
-
-
       <div class="form-group">
         <label for="dept">
           Dept
@@ -123,7 +118,6 @@ onMounted(() => {
         </label>
         <v-text-field v-model="course.description" variant="outlined" id="description"></v-text-field>
       </div>
-
     </div>
 
     <br />
