@@ -23,7 +23,7 @@ const title = "Course Listing";
       <ul class="nav-links">
         <div class="menu">
           <li>
-            <router-link :to="{ name: 'list' }"><a>LIST</a></router-link>
+            <button name="cancel" v-on:click.prevent="goToPage()">Go to Page 1</button>
           </li>
           <li>
             <router-link :to="{ name: 'add' }"
