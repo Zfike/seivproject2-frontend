@@ -115,7 +115,7 @@ function clearIconText() {
     <h1>Course List</h1>
 
     <!-- Dept Filter -->
-    <v-row align="left">
+    <v-row>
     <v-col cols="12" sm="6" md="4">
     <v-select
       v-model="selectedDept"
@@ -129,12 +129,10 @@ function clearIconText() {
     </v-col>
     </v-row>
 
-    <br />
-
     <!-- Pagination Controls -->
     <div class="pagination">
       <div class="pagination-button">
-        <button @click="toFirstPage()">≪</button>
+        <button @click="toFirstPage()">&#60;&#60;</button>
         <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">&#60;</button>
       </div>
       <div class="page-number">Page {{ currentPage }}</div>
