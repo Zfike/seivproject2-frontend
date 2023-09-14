@@ -1,10 +1,7 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import services from "../services/services.js";
-
-const currentPage = ref(1); // Define currentPage as a ref
-
 
 const router = useRouter();
 const course = ref({});
@@ -86,8 +83,9 @@ onMounted(() => {
     </v-row>
 
     <br />
-    
+  
     <button name="cancel" v-on:click.prevent="goBack()">Back</button>
+
   </div>
 </template>
 

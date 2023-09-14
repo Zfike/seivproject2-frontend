@@ -30,7 +30,7 @@ function addCourse() {
     });
 }
 function cancel() {
-  router.push({ name: "list" });
+  window.history.back();
 }
 </script>
 
@@ -50,7 +50,7 @@ function cancel() {
             errors.dept || "*"
           }}</span>
         </label>
-        <input v-model="course.dept" type="text" id="dept" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -60,7 +60,7 @@ function cancel() {
             errors.courseNo || "*"
           }}</span>
         </label>
-        <input v-model="course.courseNo" type="text" id="courseNo" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -70,7 +70,7 @@ function cancel() {
             errors.level || "*"
           }}</span>
         </label>
-        <input v-model="course.level" type="text" id="level" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -80,7 +80,7 @@ function cancel() {
             errors.hours || "*"
           }}</span>
         </label>
-        <input v-model="course.hours" type="text" id="hours" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -90,7 +90,7 @@ function cancel() {
             errors.name || "*"
           }}</span>
         </label>
-        <input v-model="course.name" type="text" id="name" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -100,7 +100,7 @@ function cancel() {
             errors.description || "*"
           }}</span>
         </label>
-        <input v-model="course.description" type="text" id="description" />
+        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
 
     </div>

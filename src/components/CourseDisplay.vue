@@ -1,7 +1,10 @@
 <script setup>
 import services from "../services/services.js";
 import { ref } from "vue";
-const props = defineProps(["course"]);
+const props = defineProps({
+  course: Object, // Assuming 'course' is passed as a prop
+  currentPage: Number, // Define currentPage as a prop
+});
 const emit = defineEmits(["deletedCourse"]);
 
 const show = ref(false);

@@ -2,7 +2,9 @@
 import { ref, computed, onMounted } from "vue";
 import services from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
@@ -46,6 +48,12 @@ function changePage(page) {
   localStorage.setItem("currentPage", page.toString());
 }
 
+function toPageOne() {
+  localStorage.removeItem("currentPage"); // Clear the current page from local storage
+  currentPage.value = 1; // Set the current page to 1
+  router.push({ name: "list", query: { page: 1 } }); // Navigate back to the first page
+}
+
 // Define a computed property to calculate the courses to display for the current page
 const coursesPerPage = 8;
 
@@ -82,7 +90,6 @@ const paginatedCourses = computed(() => {
 function toggleSortOrder() {
   sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
 }
-
 // Function to sort courses by courseNo
 function sortCourses(courses) {
   if (sortOrder.value === "asc") {
@@ -107,6 +114,7 @@ function updateDeptFilter(dept) {
     <br />
     <h2>{{ message }}</h2>
 
+
     <v-row align="left">
     <v-col cols="12" sm="6" md="4">
     <v-select
@@ -119,24 +127,27 @@ function updateDeptFilter(dept) {
     ></v-select>
     </v-col>
     </v-row>
-    
-    <div class="grid-container">
-      <CourseDisplay
-        v-for="course in paginatedCourses"
-        :key="course.id"
-        :course="course"
-        @deletedCourse="getAllCourses()"
-      />
-    </div>
-    
-<br />
-<br />
 
     <!-- Pagination Controls -->
     <div class="pagination">
       <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }}</span>
       <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
+    </div>
+
+    <br />
+    <button @click="toPageOne()">Go To Page 1</button>
+    <br />
+    <br />
+    
+    <div class="grid-container">
+      <CourseDisplay
+        v-for="course in paginatedCourses"
+        :key="course.id"
+        :course="course"
+        :currentPage="currentPage"
+        @deletedCourse="getAllCourses()"
+      />
     </div>
   </div>
 </template>
