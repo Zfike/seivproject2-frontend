@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import services from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
 
@@ -7,6 +8,8 @@ const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
+const router = useRouter();
+
 
 
 // On component mount, retrieve the current page from localStorage (if it exists)
@@ -67,6 +70,12 @@ function sortCourses(courses) {
     return courses.slice().sort((a, b) => b.courseNo.localeCompare(a.courseNo));
   }
 }
+
+function goToPage() {
+  // Clear local storage before navigating back
+  localStorage.removeItem("currentPage");
+  router.go(-1); // Go back to the previous page
+}
 </script>
 
 <template>
@@ -97,6 +106,7 @@ function sortCourses(courses) {
 
     <!-- Pagination Controls -->
     <div class="pagination">
+      <button name="cancel" v-on:click.prevent="goToPage()">Go to Page 1</button>
       <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }}</span>
       <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
