@@ -1,14 +1,14 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import services from "../services/services.js";
 import CourseDisplay from "../components/CourseDisplay.vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
-const router = useRouter();
 
 
 
@@ -71,10 +71,10 @@ function sortCourses(courses) {
   }
 }
 
-function goToPage() {
-  // Clear local storage before navigating back
-  localStorage.removeItem("currentPage");
-  router.go(-1); // Go back to the previous page
+function toPageOne() {
+  localStorage.removeItem("currentPage"); // Clear the current page from local storage
+  currentPage.value = 1; // Set the current page to 1
+  router.push({ name: "list", query: { page: 1 } }); // Navigate back to the first page
 }
 </script>
 
@@ -106,10 +106,11 @@ function goToPage() {
 
     <!-- Pagination Controls -->
     <div class="pagination">
-      <button name="cancel" v-on:click.prevent="goToPage()">Go to Page 1</button>
       <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }}</span>
       <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
     </div>
+    <br />
+    <button @click="toPageOne()">Go To Page 1</button>
   </div>
 </template>
