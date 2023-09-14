@@ -46,9 +46,7 @@ function cancel() {
       <div class="form-group">
         <label for="dept">
           Dept
-          <span id="deptErr" class="text-error">{{
-            errors.dept || "*"
-          }}</span>
+          <span id="deptErr" class="text-error">{{ errors.dept || "*" }}</span>
         </label>
         <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
       </div>
@@ -60,7 +58,7 @@ function cancel() {
             errors.courseNo || "*"
           }}</span>
         </label>
-        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
+        <v-text-field v-model="course.courseNo" variant="outlined" id="courseNo"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -70,7 +68,7 @@ function cancel() {
             errors.level || "*"
           }}</span>
         </label>
-        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
+        <v-text-field v-model="course.level" variant="outlined" id="level"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -80,7 +78,7 @@ function cancel() {
             errors.hours || "*"
           }}</span>
         </label>
-        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
+        <v-text-field v-model="course.hours" variant="outlined" id="hours"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -90,7 +88,7 @@ function cancel() {
             errors.name || "*"
           }}</span>
         </label>
-        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
+        <v-text-field v-model="course.name" variant="outlined" id="name"></v-text-field>
       </div>
 
       <div class="form-group">
@@ -100,7 +98,7 @@ function cancel() {
             errors.description || "*"
           }}</span>
         </label>
-        <v-text-field v-model="course.dept" variant="outlined" id="dept"></v-text-field>
+        <v-text-field v-model="course.description" variant="outlined" id="description"></v-text-field>
       </div>
     </div>
 
@@ -110,5 +108,6 @@ function cancel() {
       Add
     </button>
     <button name="Cancel" v-on:click.prevent="cancel()">Cancel</button>
+
   </div>
 </template>
