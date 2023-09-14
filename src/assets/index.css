@@ -228,15 +228,9 @@ select {
 
 }
 
-.mdi-close-circle {
-background-color: grey;
-}
 
-.mdi-menu-down{
-  
-  background-color: grey;
-  
-}
+
+
 
 .pagination {
   display: flex;
