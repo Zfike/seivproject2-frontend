@@ -104,6 +104,10 @@ function updateDeptFilter(dept) {
   // Save the selected department filter to localStorage
   localStorage.setItem("selectedDept", dept);
 }
+function clearIconText() {
+      // Customize the text for the clear button here
+      return 'X';
+    }
 </script>
 
 <template>
@@ -119,6 +123,7 @@ function updateDeptFilter(dept) {
       label="Filter by Department"
       variant="solo-filled"
       clearable 
+      :clear-icon="clearIconText"
       @change="updateDeptFilter(selectedDept)"
     ></v-select>
     </v-col>
