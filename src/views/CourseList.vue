@@ -38,6 +38,12 @@ function getAllCourses() {
     });
 }
 
+// Define a ref for totalPages
+const totalPages = computed(() => {
+  if (!filteredCourses.value) return 1; // Handle the case where filteredCourses is not defined
+  return Math.ceil(filteredCourses.value.length / coursesPerPage);
+});
+
 // Function to change the current page
 function changePage(page) {
   currentPage.value = page;
@@ -46,10 +52,17 @@ function changePage(page) {
   localStorage.setItem("currentPage", page.toString());
 }
 
-function toPageOne() {
+function toFirstPage() {
   localStorage.removeItem("currentPage"); // Clear the current page from local storage
   currentPage.value = 1; // Set the current page to 1
   router.push({ name: "list", query: { page: 1 } }); // Navigate back to the first page
+}
+
+function toLastPage() {
+  currentPage.value = totalPages.value;
+  
+  // Save the current page to localStorage
+  localStorage.setItem("currentPage", currentPage.value.toString());
 }
 
 // Define a computed property to calculate the courses to display for the current page
@@ -118,12 +131,13 @@ function updateDeptFilter(dept) {
     <!-- Pagination Controls -->
     <div class="pagination">
       <div class="pagination-button">
-        <button @click="toPageOne()">≪</button>
+        <button @click="toFirstPage()">≪</button>
         <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">&#60;</button>
       </div>
       <div class="page-number">Page {{ currentPage }}</div>
       <div class="pagination-button">
         <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">&#62;</button>
+        <button @click="toLastPage()" :disabled="currentPage === totalPages">&#62;&#62;</button>
       </div>
     </div>
 
