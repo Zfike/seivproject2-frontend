@@ -23,7 +23,8 @@ const title = "Course Listing";
       <ul class="nav-links">
         <div class="menu">
           <li>
-            <router-link :to="{ name: 'list' }"><a>LIST</a></router-link>
+            <router-link :to="{ name: 'list' }"
+            ><a>LIST</a></router-link>
           </li>
           <li>
             <router-link :to="{ name: 'add' }"

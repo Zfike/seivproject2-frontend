@@ -11,7 +11,6 @@ const currentPage = ref(1); // Initialize the current page to 1
 const sortOrder = ref("asc"); // Initialize sorting order to ascending
 const selectedDept = ref(""); // Initialize the department filter
 
-
 // On component mount, retrieve the current page from localStorage (if it exists)
 onMounted(() => {
   const savedPage = localStorage.getItem("currentPage");
@@ -86,10 +85,6 @@ const paginatedCourses = computed(() => {
   return filteredCourses.value.slice(startIndex, endIndex);
 });
 
-//Function to toggle sorting order
-function toggleSortOrder() {
-  sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
-}
 // Function to sort courses by courseNo
 function sortCourses(courses) {
   if (sortOrder.value === "asc") {
@@ -114,7 +109,7 @@ function updateDeptFilter(dept) {
     <br />
     <h2>{{ message }}</h2>
 
-
+    <!-- Dept Filter -->
     <v-row align="left">
     <v-col cols="12" sm="6" md="4">
     <v-select
@@ -136,7 +131,9 @@ function updateDeptFilter(dept) {
     </div>
 
     <br />
+
     <button @click="toPageOne()">Go To Page 1</button>
+    
     <br />
     <br />
     
