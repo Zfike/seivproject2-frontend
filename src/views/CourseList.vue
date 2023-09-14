@@ -8,7 +8,6 @@ const router = useRouter();
 const courses = ref(null);
 const message = ref("");
 const currentPage = ref(1); // Initialize the current page to 1
-const sortOrder = ref("asc"); // Initialize sorting order to ascending
 const selectedDept = ref(""); // Initialize the department filter
 
 // On component mount, retrieve the current page from localStorage (if it exists)
@@ -85,15 +84,6 @@ const paginatedCourses = computed(() => {
   return filteredCourses.value.slice(startIndex, endIndex);
 });
 
-// Function to sort courses by courseNo
-function sortCourses(courses) {
-  if (sortOrder.value === "asc") {
-    return courses.slice().sort((a, b) => a.courseNo.localeCompare(b.courseNo));
-  } else {
-    return courses.slice().sort((a, b) => b.courseNo.localeCompare(a.courseNo));
-  }
-}
-
 // Function to update the selected department filter
 function updateDeptFilter(dept) {
   selectedDept.value = dept;
@@ -123,18 +113,17 @@ function updateDeptFilter(dept) {
     </v-col>
     </v-row>
 
+    <button @click="toPageOne()">Go To Page 1</button>
+
+    <br /><br /><br />
+
     <!-- Pagination Controls -->
     <div class="pagination">
       <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }}</span>
       <button @click="changePage(currentPage + 1)" :disabled="currentPage * coursesPerPage >= filteredCourses.length">Next</button>
     </div>
-
-    <br />
-
-    <button @click="toPageOne()">Go To Page 1</button>
     
-    <br />
     <br />
     
     <div class="grid-container">
